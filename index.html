@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rodrigo Miqui · Desenvolvedor Fullstack</title>
+  <meta name="description" content="Rodrigo Miqui, desenvolvedor fullstack desde 1996 em Florianópolis/SC. Projetos, experiência e contato em um terminal interativo.">
+  <meta property="og:title" content="Rodrigo Miqui · Desenvolvedor Fullstack">
+  <meta property="og:description" content="Portfólio em formato de terminal interativo.">
+  <meta property="og:url" content="https://miqui.com.br">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#0d1117">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230d1117'/><text x='5' y='22' font-family='monospace' font-size='16' fill='%233fb950'>&gt;_</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="terminal" class="window" aria-label="Terminal interativo">
+    <header class="titlebar">
+      <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="title">miqui@miqui.com.br: ~</span>
+      <button type="button" class="switch" data-mode="gui">modo simples</button>
+    </header>
+    <div id="screen" class="screen">
+      <div id="output" role="log" aria-live="polite"></div>
+      <form id="prompt" class="prompt-line" autocomplete="off">
+        <label for="cmd" class="prompt"></label>
+        <input id="cmd" type="text" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="send" aria-label="Digite um comando">
+      </form>
+    </div>
+    <nav id="chips" class="chips" aria-label="Comandos rápidos"></nav>
+  </main>
+
+  <div id="gui" class="gui" hidden></div>
+
+  <noscript>
+    <p class="noscript">Este site usa JavaScript para o terminal. Contato: <a href="mailto:rodrigo@miqui.com.br">rodrigo@miqui.com.br</a></p>
+  </noscript>
+
+  <script src="content.js"></script>
+  <script src="terminal.js"></script>
+</body>
+</html>

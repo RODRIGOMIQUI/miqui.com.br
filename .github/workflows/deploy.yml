@@ -1,0 +1,32 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency: deploy
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Secrets necessários (Settings → Secrets and variables → Actions):
+      #   DEPLOY_SSH_KEY  conteúdo da chave privada de deploy
+      #   DEPLOY_HOST     usuario@host do SFTP
+      - name: Configurar chave SFTP
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H "${DEPLOY_HOST#*@}" >> ~/.ssh/known_hosts
+          echo "DEPLOY_KEY=$HOME/.ssh/deploy_key" >> "$GITHUB_ENV"
+
+      - name: Publicar
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+        run: ./deploy.sh
