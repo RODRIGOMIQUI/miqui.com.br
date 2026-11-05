@@ -4,6 +4,11 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      debug:
+        description: Mostrar o diálogo SSH (diagnóstico)
+        type: boolean
+        default: false
 
 concurrency: deploy
 
@@ -29,4 +34,5 @@ jobs:
       - name: Publicar
         env:
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_DEBUG: ${{ inputs.debug && '1' || '' }}
         run: ./deploy.sh
