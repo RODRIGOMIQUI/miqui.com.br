@@ -44,6 +44,13 @@ window.SITE = {
       stack: ['ASP.NET', 'VB.NET', 'SQL Server', 'JavaScript'],
     },
     {
+      name: 'retroamp',
+      title: 'RetroAmp',
+      desc: 'Player de MP3 estilo anos 90, com equalizador de 10 bandas, visualizador, playlist, skins e letras sincronizadas. Roda no navegador ou como app desktop.',
+      stack: ['HTML', 'CSS', 'JavaScript', 'Web Audio API', 'Electron'],
+      url: 'https://github.com/RODRIGOMIQUI/retroamp',
+    },
+    {
       name: 'miqui.com.br',
       title: 'Este site',
       desc: 'Portfólio em formato de terminal, sem framework e sem dependências.',
