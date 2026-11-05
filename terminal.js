@@ -9,6 +9,7 @@
   // ---------- Utilitários ----------
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const link = (href, text = href) => `<a href="${esc(href)}" target="_blank" rel="noopener">${esc(text)}</a>`;
+  const shot = (p) => `<img class="shot" src="${esc(p.image)}" alt="${esc(p.imageAlt || 'Tela do projeto ' + p.title)}" loading="lazy">`;
   const c = (cls, text) => `<span class="${cls}">${esc(text)}</span>`;
   const prompt = `<span class="p-user">${esc(S.handle)}@${esc(S.host)}</span>:<span class="p-path">~</span>$`;
 
@@ -86,6 +87,12 @@
         print(esc(p.desc));
         print(`${c('c-muted', 'stack:')} ${esc(p.stack.join(', '))}`);
         if (p.url) print(`${c('c-muted', 'link:')}  ${link(p.url)}`);
+        if (p.repo) print(`${c('c-muted', 'código:')} ${link(p.repo)}`);
+        if (p.image) {
+          print(shot(p));
+          // a imagem carrega depois do print: rola de novo para ela ficar visível
+          out.lastElementChild.querySelector('img').addEventListener('load', scrollDown);
+        }
         return;
       }
       print(`<div class="grid">${S.projects.map((p, i) =>
@@ -287,9 +294,11 @@
       <h2>projetos</h2>
       ${S.projects.map((p) => `
         <div class="card">
-          <h3>${p.url ? link(p.url, p.title) : esc(p.title)}</h3>
+          <h3>${p.url || p.repo ? link(p.url || p.repo, p.title) : esc(p.title)}</h3>
           <p>${esc(p.desc)}</p>
+          ${p.image ? shot(p) : ''}
           <div class="tags">${esc(p.stack.join(' · '))}</div>
+          ${p.repo ? `<div class="tags">código: ${link(p.repo, p.repo.replace(/^https:\/\//, ''))}</div>` : ''}
         </div>`).join('')}
       <h2>experiência</h2>
       ${S.since ? `<p class="c-muted">Desenvolvendo desde ${S.since}.</p>` : ''}

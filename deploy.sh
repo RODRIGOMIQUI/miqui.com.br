@@ -13,9 +13,10 @@ HOST="${DEPLOY_HOST:?Defina DEPLOY_HOST (usuario@host) no ambiente ou em .deploy
 KEY="${DEPLOY_KEY:-$HOME/.ssh/id_miquicombr}"
 REMOTE="public_html"
 VERB=-q; [ "${DEPLOY_DEBUG:-}" = 1 ] && VERB=-vv
-FILES=(index.html style.css terminal.js content.js .htaccess)
+FILES=(index.html style.css terminal.js content.js .htaccess img/*)
 
 {
+  echo "-mkdir $REMOTE/img"  # o "-" ignora o erro se a pasta já existir
   for f in "${FILES[@]}"; do echo "put $f $REMOTE/$f"; done
   for f in "${FILES[@]}"; do echo "chmod 644 $REMOTE/$f"; done
 } | sftp "$VERB" -i "$KEY" -o IdentitiesOnly=yes -o BatchMode=yes -b - "$HOST" \

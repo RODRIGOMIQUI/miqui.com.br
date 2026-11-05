@@ -161,6 +161,8 @@ a:hover { color: var(--accent); }
 .gui .role { color: var(--muted); margin: 4px 0 0; }
 .gui .card { border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; margin-bottom: 12px; background: var(--win); }
 .gui .tags { color: var(--muted); font-size: 13px; }
+.shot { display: block; max-width: min(100%, 360px); height: auto; margin: 8px 0; border: 1px solid var(--border); border-radius: 6px; }
+.gui .shot { margin: 4px 0 12px; }
 .gui ul { padding-left: 20px; margin: 0; }
 .gui footer { margin: 48px 0 16px; color: var(--muted); font-size: 13px; }
 

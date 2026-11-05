@@ -48,7 +48,9 @@ window.SITE = {
       title: 'RetroAmp',
       desc: 'Player de MP3 estilo anos 90, com equalizador de 10 bandas, visualizador, playlist, skins e letras sincronizadas. Roda no navegador ou como app desktop.',
       stack: ['HTML', 'CSS', 'JavaScript', 'Web Audio API', 'Electron'],
-      url: 'https://github.com/RODRIGOMIQUI/retroamp',
+      repo: 'https://github.com/RODRIGOMIQUI/retroamp',
+      image: 'img/retroamp.webp',
+      imageAlt: 'RetroAmp tocando: display LCD, visualizador, equalizador de 10 bandas e playlist',
     },
     {
       name: 'miqui.com.br',
