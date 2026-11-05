@@ -26,8 +26,11 @@ jobs:
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
         run: |
           mkdir -p ~/.ssh
-          printf '%s\n' "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/deploy_key
+          # tr remove \r caso a chave tenha sido colada com quebras de linha do Windows
+          printf '%s\n' "${{ secrets.DEPLOY_SSH_KEY }}" | tr -d '\r' > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
+          ssh-keygen -y -f ~/.ssh/deploy_key > /dev/null \
+            || { echo "::error::DEPLOY_SSH_KEY inválida: cole o arquivo da chave inteiro, do BEGIN ao END"; exit 1; }
           ssh-keyscan -H "${DEPLOY_HOST#*@}" >> ~/.ssh/known_hosts
           echo "DEPLOY_KEY=$HOME/.ssh/deploy_key" >> "$GITHUB_ENV"
 
